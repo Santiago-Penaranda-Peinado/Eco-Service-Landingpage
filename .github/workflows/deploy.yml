@@ -29,4 +29,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            rsync -av --delete dist/ ${{ secrets.TARGET_DIR }}
+            rsync -av --delete Eco-Service-Landingpage/dist/ ${{ secrets.TARGET_DIR }}
