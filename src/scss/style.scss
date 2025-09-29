@@ -1,10 +1,11 @@
-// scss/style.scss
+// src/scss/style.scss
 
-// 1. Variables (siempre primero)
-@import 'partials/variables';
+// 1. Variables
+@use 'partials/variables' as *;
 
 // 2. Reset y estilos base
-@import 'partials/reset';
+@use 'partials/reset';
 
-// 3. Estilos de componentes (iremos añadiendo más)
-@import 'partials/header';
+// 3. Estilos de componentes
+@use 'partials/header';
+@use 'partials/hero'; 

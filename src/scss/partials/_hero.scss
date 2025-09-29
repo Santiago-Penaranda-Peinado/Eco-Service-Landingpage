@@ -1,0 +1,36 @@
+// src/scss/partials/_hero.scss
+
+.hero-section {
+  background-color: #f4f6f9; // Un fondo gris muy claro para empezar
+  padding: 6rem 0; // Mucho espacio vertical para que respire
+  text-align: center;
+
+  .container {
+    // Reutilizaremos la clase .container, pero la adaptamos para que el contenido sea centrado
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; // Espacio entre el título, el párrafo y el botón
+  }
+
+  h1 {
+    font-size: 3.5rem; // Letra grande y llamativa
+    max-width: 800px; // Evita que el título sea demasiado ancho en pantallas grandes
+    line-height: 1.2;
+    color: $color-primario;
+  }
+
+  p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    color: lighten($color-texto, 20%); // Un gris un poco más claro que el texto normal
+  }
+
+  // Estilo para el botón secundario (podemos hacerlo diferente al del header)
+  .btn-secondary {
+    background-color: $color-secundario;
+    color: white;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+  }
+}
