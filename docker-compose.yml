@@ -1,0 +1,17 @@
+services:
+  # Nombre del servicio, puedes ponerle como quieras
+  app:
+    # Usa la imagen oficial de Node.js (versión 20)
+    image: node:20-alpine
+    # Nombre del contenedor para identificarlo fácilmente
+    container_name: landing-dev
+    # Comando para mantener el contenedor corriendo
+    command: sh -c "npm install && npm run dev -- --host"
+    # Mapea el puerto 5173 del contenedor al 5173 de tu PC
+    ports:
+      - "5173:5173"
+    # Conecta la carpeta actual de tu PC con la carpeta /app dentro del contenedor
+    volumes:
+      - .:/app
+    # Directorio de trabajo dentro del contenedor
+    working_dir: /app
