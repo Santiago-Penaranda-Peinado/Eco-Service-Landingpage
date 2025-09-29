@@ -1,0 +1,57 @@
+// src/scss/partials/_header.scss
+
+.site-header {
+  padding: 1rem 0;
+  background-color: $color-fondo;
+  border-bottom: 1px solid #eaeaea;
+
+  // Usaremos este contenedor en varias secciones
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo img {
+    max-width: 200px; // Ajusta el tamaño del logo según necesites
+    display: block; // Evita espacios extra debajo de la imagen
+  }
+
+  .main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem; // Espacio entre elementos del menú
+
+    li a {
+      text-decoration: none;
+      color: $color-texto;
+      font-weight: 600;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $color-secundario; // Color turquesa al pasar el cursor
+      }
+    }
+  }
+
+  // Estilos para el botón de "Cotiza Ahora"
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  .btn-primary {
+    background-color: $color-primario;
+    color: white;
+  }
+}
