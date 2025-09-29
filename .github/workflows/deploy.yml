@@ -3,7 +3,7 @@ name: Build and Deploy Eco-Service Landing
 on:
   push:
     branches:
-      - master # o main
+      - master  # o main, usa solo uno
 
 jobs:
   build-and-deploy:
@@ -16,22 +16,57 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: './Eco-Service-Landingpage/package-lock.json'
 
       - name: Install and Build
-        # Indicamos que este paso se ejecute dentro de la subcarpeta
         working-directory: ./Eco-Service-Landingpage
         run: |
-          npm install
+          npm ci
           npm run build
+        env:
+          CI: true
+
+      - name: Verify build output
+        working-directory: ./Eco-Service-Landingpage
+        run: |
+          echo "Contenido del directorio build:"
+          ls -la dist/ || ls -la build/ || echo "No se encontró directorio de build"
 
       - name: Deploy to Server
-        # También indicamos el directorio de trabajo aquí
-        working-directory: ./Eco-Service-Landingpage
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # Ahora la ruta vuelve a ser simple, porque ya estamos dentro de la carpeta
+          script_stop: true
           script: |
-            rsync -av --delete dist/ ${{ secrets.TARGET_DIR }}
+            # Verificar que el directorio destino existe
+            mkdir -p ${{ secrets.TARGET_DIR }}
+            
+            # Verificar estructura en el servidor
+            echo "Directorio actual en servidor: $(pwd)"
+            echo "Listando contenido:"
+            ls -la
+            
+            # Crear directorio si no existe
+            if [ ! -d "Eco-Service-Landingpage" ]; then
+              echo "Creando directorio Eco-Service-Landingpage"
+              mkdir -p Eco-Service-Landingpage
+            fi
+            
+            # Navegar al directorio
+            cd Eco-Service-Landingpage
+            
+            # Verificar qué hay antes del deploy
+            echo "Contenido antes del deploy:"
+            ls -la
+            
+            # Sincronizar archivos
+            echo "Iniciando deploy..."
+            rsync -av --delete /home/runner/work/_temp/*/dist/ ./ || \
+            rsync -av --delete /home/runner/work/your-repo-name/your-repo-name/Eco-Service-Landingpage/dist/ ./
+            
+            # Verificar resultado
+            echo "Contenido después del deploy:"
+            ls -la
