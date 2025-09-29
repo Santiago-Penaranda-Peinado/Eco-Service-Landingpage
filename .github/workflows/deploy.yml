@@ -25,11 +25,11 @@ jobs:
           npm run build
 
       - name: Deploy to Server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/scp-action@v0.1.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            mkdir -p ${{ secrets.TARGET_DIR }}
-            rsync -av --delete ./dist/ ${{ secrets.TARGET_DIR }}
+          source: "dist/*"
+          target: "/var/www/vhosts/wde.com.mx/Eco-Service.wde.com.mx"
+          strip_components: 1
