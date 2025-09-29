@@ -3,7 +3,7 @@ name: Build and Deploy Eco-Service Landing
 on:
   push:
     branches:
-      - master
+      - master # o main
 
 jobs:
   build-and-deploy:
@@ -18,15 +18,20 @@ jobs:
           node-version: '20'
 
       - name: Install and Build
+        # Indicamos que este paso se ejecute dentro de la subcarpeta
+        working-directory: ./Eco-Service-Landingpage
         run: |
           npm install
           npm run build
 
       - name: Deploy to Server
+        # También indicamos el directorio de trabajo aquí
+        working-directory: ./Eco-Service-Landingpage
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          # Ahora la ruta vuelve a ser simple, porque ya estamos dentro de la carpeta
           script: |
-            rsync -av --delete Eco-Service-Landingpage/dist/ ${{ secrets.TARGET_DIR }}
+            rsync -av --delete dist/ ${{ secrets.TARGET_DIR }}
