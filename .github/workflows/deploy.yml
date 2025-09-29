@@ -8,26 +8,16 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
-    # Establece el directorio de trabajo para todos los pasos
-    defaults:
-      run:
-        working-directory: ./Eco-Service-Landingpage
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          # Clona el repo dentro de la subcarpeta
-          path: Eco-Service-Landingpage
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          # El caché ahora encontrará el archivo en la ruta correcta
           cache: 'npm'
-          cache-dependency-path: Eco-Service-Landingpage/package-lock.json
 
       - name: Install and Build
         run: |
@@ -35,11 +25,10 @@ jobs:
           npm run build
 
       - name: Deploy to Server
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # El script es ahora más simple y robusto
           script: |
-            rsync -av --delete ./Eco-Service-Landingpage/dist/ ${{ secrets.TARGET_DIR }}
+            rsync -av --delete dist/ ${{ secrets.TARGET_DIR }}
