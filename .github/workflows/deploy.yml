@@ -24,7 +24,7 @@ jobs:
           npm ci
           npm run build
 
-            - name: Deploy to Server
+      - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
