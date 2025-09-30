@@ -1,36 +1,267 @@
 // src/scss/partials/_hero.scss
 
 .hero-section {
-  background-color: #f4f6f9; // Un fondo gris muy claro para empezar
-  padding: 6rem 0; // Mucho espacio vertical para que respire
-  text-align: center;
+  padding: 8rem 0 6rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.03"><polygon fill="%23582153" points="0,1000 1000,0 1000,1000"/></svg>');
+    background-size: cover;
+  }
 
-  .container {
-    // Reutilizaremos la clase .container, pero la adaptamos para que el contenido sea centrado
-    display: flex;
-    flex-direction: column;
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
     align-items: center;
-    gap: 1.5rem; // Espacio entre el título, el párrafo y el botón
+    position: relative;
+    z-index: 2;
+
+    @media (min-width: 992px) {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 6rem;
+    }
+  }
+}
+
+// Estilos para el contenido de texto
+.hero-content {
+  text-align: center;
+  
+  @media (min-width: 768px) {
+    text-align: left;
   }
 
-  h1 {
-    font-size: 3.5rem; // Letra grande y llamativa
-    max-width: 800px; // Evita que el título sea demasiado ancho en pantallas grandes
-    line-height: 1.2;
-    color: $color-primario;
-  }
-
-  p {
-    font-size: 1.2rem;
-    max-width: 700px;
-    color: lighten($color-texto, 20%); // Un gris un poco más claro que el texto normal
-  }
-
-  // Estilo para el botón secundario (podemos hacerlo diferente al del header)
-  .btn-secondary {
-    background-color: $color-secundario;
-    color: white;
+  .pre-title {
+    display: inline-block;
     font-size: 1.1rem;
-    padding: 1rem 2rem;
+    font-weight: 600;
+    color: $color-primario;
+    background: rgba(88, 33, 83, 0.1);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
+
+  .main-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+    font-weight: 700;
+
+    @media (min-width: 768px) {
+      font-size: 3.5rem;
+    }
+
+    @media (min-width: 1200px) {
+      font-size: 4rem;
+    }
+
+    strong {
+      color: $color-secundario;
+      background: linear-gradient(135deg, $color-secundario, darken($color-secundario, 15%));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  .hero-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #4a5568;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    
+    @media (min-width: 768px) {
+      font-size: 1.3rem;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    &.btn-secondary {
+      background: $color-secundario;
+      color: white;
+      border: 2px solid $color-secundario;
+
+      &:hover {
+        background: darken($color-secundario, 10%);
+        border-color: darken($color-secundario, 10%);
+      }
+    }
+  }
+}
+
+// Estilos para el área visual con formas animadas
+.hero-visual {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    min-height: 500px;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 20px;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0.9;
+    filter: blur(0.5px);
+
+    // Forma principal - grande
+    &.shape-1 {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, $color-primario, lighten($color-primario, 15%));
+      top: 10%;
+      left: 10%;
+      animation: float 6s ease-in-out infinite;
+      
+      @media (min-width: 768px) {
+        width: 250px;
+        height: 250px;
+      }
+    }
+
+    // Forma secundaria - mediana
+    &.shape-2 {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, $color-secundario, lighten($color-secundario, 10%));
+      bottom: 20%;
+      right: 15%;
+      animation: float 4s ease-in-out infinite 1s;
+      
+      @media (min-width: 768px) {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    // Forma terciaria - pequeña
+    &.shape-3 {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #48bb78, #38a169);
+      top: 50%;
+      left: 5%;
+      animation: float 5s ease-in-out infinite 0.5s;
+      border-radius: 50%;
+    }
+
+    // Forma adicional - para balance
+    &.shape-4 {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #4299e1, #3182ce);
+      bottom: 10%;
+      left: 20%;
+      animation: float 7s ease-in-out infinite 1.5s;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+  }
+}
+
+// Animación de flotación para las formas
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(10px) rotate(-5deg);
+  }
+}
+
+// Efectos de hover para las formas (opcional, para interactividad)
+.hero-visual:hover {
+  .shape {
+    opacity: 1;
+    filter: blur(0);
+    
+    &.shape-1 {
+      transform: scale(1.05);
+    }
+    
+    &.shape-2 {
+      transform: scale(1.1);
+    }
+    
+    &.shape-3 {
+      transform: scale(1.15);
+    }
+    
+    &.shape-4 {
+      transform: scale(1.08);
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 767px) {
+  .hero-section {
+    padding: 6rem 0 4rem;
+    
+    .hero-container {
+      gap: 3rem;
+    }
+  }
+  
+  .hero-visual {
+    min-height: 300px;
+    
+    .shape {
+      &.shape-1 {
+        width: 150px;
+        height: 150px;
+      }
+      
+      &.shape-2 {
+        width: 100px;
+        height: 100px;
+      }
+      
+      &.shape-3 {
+        width: 60px;
+        height: 60px;
+      }
+      
+      &.shape-4 {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  } 
 }
