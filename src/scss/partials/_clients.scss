@@ -4,21 +4,27 @@
 .clients-section {
   padding: 6rem 0;
   background-color: $color-fondo;
+  
   .section-title {
     margin-bottom: 4rem;
   }
 }
 
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  0% { 
+    transform: translateX(0); 
+  }
+  100% { 
+    transform: translateX(calc(-250px * 6)); // Mueve solo la mitad (los slides originales)
+  }
 }
 
 .logos-slider {
   overflow: hidden;
   position: relative;
   width: 100%;
-  &::before, &::after { // Efecto de difuminado en los bordes
+  
+  &::before, &::after {
     content: '';
     position: absolute;
     top: 0;
@@ -26,32 +32,79 @@
     height: 100%;
     z-index: 2;
   }
-  &::before { left: 0; background: linear-gradient(to left, rgba(255,255,255,0), $color-fondo); }
-  &::after { right: 0; background: linear-gradient(to right, rgba(255,255,255,0), $color-fondo); }
+  
+  &::before { 
+    left: 0; 
+    background: linear-gradient(to right, $color-fondo, rgba(255,255,255,0)); 
+  }
+  
+  &::after { 
+    right: 0; 
+    background: linear-gradient(to left, $color-fondo, rgba(255,255,255,0)); 
+  }
 }
 
 .logos-track {
-  animation: scroll 40s linear infinite;
+  animation: scroll 60s linear infinite;
   display: flex;
-  width: calc(250px * 12); // Ancho de slide * número de slides
+  width: calc(250px * 12); // Ancho de slide * número total de slides (originales + duplicados)
+  
+  &:hover {
+    animation-play-state: paused;
+  }
 }
 
 .slide {
-  height: 100px;
+  height: 140px;
   width: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 15px;
+  flex-shrink: 0;
   
   img {
     max-width: 180px;
+    max-height: 180px;
     filter: grayscale(100%);
     opacity: 0.6;
     transition: all 0.3s ease;
+    
     &:hover {
       filter: grayscale(0%);
       opacity: 1;
+      transform: scale(1.05);
     }
+  }
+}
+
+// Efecto de pausa al hover para mejor UX
+.logos-track:hover {
+  animation-play-state: paused;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .clients-section {
+    padding: 4rem 0;
+  }
+  
+  .slide {
+    width: 200px;
+    height: 120px;
+    
+    img {
+      max-width: 134px;
+      max-height: 134px;
+    }
+  }
+  
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-200px * 6)); }
+  }
+  
+  .logos-track {
+    width: calc(200px * 12);
   }
 }
