@@ -1,0 +1,129 @@
+// _footer.scss
+@use 'variables' as *;
+@use 'sass:color';
+
+.site-footer {
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  color: white;
+  padding: 4rem 0 2rem;
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+    }
+  }
+  
+  .footer-brand {
+    .footer-logo {
+      max-width: 200px;
+      margin-bottom: 1rem;
+      filter: brightness(0) invert(1);
+    }
+    
+    .footer-tagline {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      
+      a {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: $color-secundario;
+          transform: translateY(-2px);
+        }
+        
+        i {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    
+    h4 {
+      color: white;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+    
+    ul {
+      list-style: none;
+      
+      li {
+        margin-bottom: 0.8rem;
+        
+        a, &.contact-info {
+          color: rgba(255, 255, 255, 0.7);
+          text-decoration: none;
+          transition: color 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          
+          &:hover {
+            color: $color-secundario;
+          }
+        }
+      }
+    }
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+    
+    p {
+      opacity: 0.7;
+      margin: 0;
+    }
+    
+    .footer-legal {
+      display: flex;
+      gap: 2rem;
+      
+      a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        font-size: 0.9rem;
+        
+        &:hover {
+          color: $color-secundario;
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 // src/scss/partials/_layout.scss
+@use 'variables' as *;
 
 .container {
   width: 90%;
@@ -7,4 +8,112 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.site-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+// Elementos decorativos para pantallas grandes
+@media (min-width: 1400px) {
+  .site-wrapper::before,
+  .site-wrapper::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(46, 58, 135, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(64, 178, 214, 0.03) 0%, transparent 50%);
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  .site-wrapper::before { left: 0; }
+  .site-wrapper::after { right: 0; }
+}
+
+// Smooth scroll y mejoras de navegación
+html {
+  scroll-behavior: smooth;
+}
+
+// Indicador de sección activa
+.main-nav {
+  li {
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: $color-secundario;
+      transition: width 0.3s ease;
+    }
+    
+    &:hover::after,
+    &.active::after {
+      width: 100%;
+    }
+  }
+}
+
+// Patrones sutiles de fondo para algunas secciones
+.why-us-section {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba($color-secundario, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+// Efectos de partículas sutiles (opcional)
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  
+  .particle {
+    position: absolute;
+    background: rgba($color-secundario, 0.1);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+// En _layout.scss
+.curved-divider {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px; // Altura de la curva
+    // SVG de una curva suave, apuntando hacia abajo
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M1200 120L0 120 0 0 1200 0 1200 120z' fill='%23FFFFFF'/%3E%3Cpath d='M1200 0H0v120h281.91C574.45 40.23 883.36 40.23 1200 120V0z' fill='%23f8fafc'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    // El color de fondo del SVG debe coincidir con el de la SIGUIENTE sección.
+    // En este SVG, el color #f8fafc coincide con el fondo de tus secciones de servicios y filosofía.
+    // El color #FFFFFF (blanco) coincide con el de la sección "Por qué elegirnos".
+    transform: rotate(180deg);
+  }
 }

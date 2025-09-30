@@ -73,7 +73,7 @@
 
     strong {
       color: $color-secundario;
-      background: linear-gradient(135deg, $color-secundario, darken($color-secundario, 15%));
+      background: linear-gradient(135deg, $color-secundario, color.adjust($color-secundario, $lightness: -15%));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;

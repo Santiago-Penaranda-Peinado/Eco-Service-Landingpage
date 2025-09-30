@@ -83,3 +83,11 @@
     line-height: 1.6;
   }
 }
+
+@media (min-width: 992px) {
+  .features-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2.5rem; // Espacio vertical y horizontal
+  }
+}

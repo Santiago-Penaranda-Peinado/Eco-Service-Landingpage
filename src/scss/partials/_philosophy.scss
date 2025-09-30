@@ -1,16 +1,81 @@
 // src/scss/partials/_philosophy.scss
 @use 'variables' as *;
+@use 'sass:color';
 
 .philosophy-section {
-  padding: 6rem 0;
-  background-color: $color-fondo;
+  padding: 8rem 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  position: relative;
+  overflow: hidden;
+  
+  &.angled-divider {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(135deg, transparent 49.5%, #f8fafc 50%);
+      z-index: 2;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba($color-primario, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba($color-secundario, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+  }
 }
 
 .philosophy-container {
+  position: relative;
+  z-index: 3;
+}
+
+.philosophy-header {
+  text-align: center;
+  margin-bottom: 5rem;
+
+  .pre-title {
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $color-primario;
+    background: linear-gradient(135deg, rgba($color-primario, 0.1), rgba($color-secundario, 0.1));
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 1px solid rgba($color-primario, 0.2);
+  }
+
+  h2 {
+    font-size: 3rem;
+    color: #1a202c;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    
+    @media (min-width: 768px) {
+      font-size: 3.5rem;
+    }
+  }
+}
+
+.philosophy-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 3rem;
-
+  
   @media (min-width: 992px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 4rem;
@@ -18,29 +83,222 @@
 }
 
 .philosophy-card {
-  text-align: center;
-  padding: 3rem 2.5rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-radius: 24px;
+  // --- ESTILOS BASE ---
+  background: white;
+  padding: 4rem 3rem;
+  border-radius: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(226, 232, 240, 0.8);
+  position: relative;
+  overflow: hidden;
+  
+  // --- ESTADO INICIAL PARA ANIMACIÓN DE SCROLL ---
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: transform, box-shadow; // <-- AÑADE ESTA LÍNEA TAMBIÉN
 
-  .philosophy-icon {
-    margin-bottom: 1.5rem;
+  // --- LA TRANSICIÓN UNIFICADA Y CORREGIDA ---
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.6s ease,
+              box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  // --- PSEUDO-ELEMENTOS Y HOVER ---
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(135deg, $color-primario, $color-secundario);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  // --- ESTADO VISIBLE (ACTIVADO POR JS) ---
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    
+    &:nth-child(1) { transition-delay: 0.1s, 0.1s, 0s; }
+    &:nth-child(2) { transition-delay: 0.2s, 0.2s, 0s; }
+  }
+
+  &.is-visible:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+    transition-delay: 0s; // Reseteamos el delay
+
+    &::before {
+      transform: scaleX(1);
+    }
+    
+    .card-icon {
+      transform: scale(1.1) rotate(5deg);
+      background: linear-gradient(135deg, $color-primario, $color-secundario);
+      
+      i {
+        color: white;
+      }
+    }
+
+    // Y también la animación de los puntos
+    .decoration-dot {
+      animation: pulse 2s ease-in-out infinite;
+    
+      &.dot-1 { animation-delay: 0s; }
+      &.dot-2 { animation-delay: 0.3s; }
+      &.dot-3 { animation-delay: 0.6s; }
+    }
+  }
+
+  .card-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2.5rem;
+    background: rgba($color-primario, 0.08);
+    transition: all 0.4s ease;
+    
     i {
-      font-size: 2.5rem;
+      font-size: 3rem;
       color: $color-primario;
+      transition: color 0.3s ease;
     }
   }
 
   h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 2rem;
     color: #1a202c;
+    font-weight: 700;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(135deg, $color-primario, $color-secundario);
+      border-radius: 2px;
+    }
   }
 
   p {
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1.2rem;
+    line-height: 1.8;
     color: #4a5568;
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+// Variantes específicas para Misión y Visión
+.mission-card {
+  .card-icon {
+    background: rgba($color-primario, 0.08);
+    i { color: $color-primario; }
+  }
+  
+  &:hover {
+    .card-icon {
+      background: linear-gradient(135deg, $color-primario, color.adjust($color-primario, $lightness: -10%));
+    }
+  }
+}
+
+.vision-card {
+  .card-icon {
+    background: rgba($color-secundario, 0.08);
+    i { color: $color-secundario; }
+  }
+  
+  &:hover {
+    .card-icon {
+      background: linear-gradient(135deg, $color-secundario, color.adjust($color-secundario, $lightness: -10%));
+    }
+  }
+}
+
+// Elementos decorativos
+.card-decoration {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  
+  .decoration-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    opacity: 0.3;
+    
+    &.dot-1 { background: $color-primario; }
+    &.dot-2 { background: $color-secundario; }
+    &.dot-3 { background: #48bb78; }
+  }
+}
+
+// Responsive
+@media (max-width: 767px) {
+  .philosophy-section {
+    padding: 6rem 0;
+    
+    &.angled-divider::before {
+      height: 60px;
+    }
+  }
+  
+  .philosophy-header {
+    margin-bottom: 3rem;
+    
+    h2 {
+      font-size: 2.5rem;
+    }
+  }
+  
+  .philosophy-card {
+    padding: 3rem 2rem;
+    
+    .card-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 2rem;
+      
+      i {
+        font-size: 2.5rem;
+      }
+    }
+    
+    h3 {
+      font-size: 1.8rem;
+    }
+    
+    p {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+// Animación para los puntos decorativos
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.philosophy-card:hover {
+  .decoration-dot {
+    animation: pulse 2s ease-in-out infinite;
+    
+    &.dot-1 { animation-delay: 0s; }
+    &.dot-2 { animation-delay: 0.3s; }
+    &.dot-3 { animation-delay: 0.6s; }
   }
 }

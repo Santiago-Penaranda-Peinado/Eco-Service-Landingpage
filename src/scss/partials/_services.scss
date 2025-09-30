@@ -26,6 +26,12 @@
     position: relative;
     z-index: 2;
   }
+  
+   &::before {
+    top: -50px; // Reducimos el desplazamiento superior
+    height: 50px; // Reducimos la altura
+    background-size: 100% 50px; // Hacemos que el SVG se ajuste a la nueva altura
+  }
 }
 
 .section-title {
@@ -76,21 +82,31 @@
 }
 
 .service-card {
+  // --- ESTILOS BASE ---
   background: white;
   border-radius: 24px;
   padding: 3.5rem 2.5rem;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   border: 1px solid rgba(226, 232, 240, 0.8);
-  
-  // Layout en grid para ícono y contenido
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 2rem;
   align-items: start;
+  
+  // --- ESTADO INICIAL PARA ANIMACIÓN DE SCROLL ---
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: transform, box-shadow; // <-- AÑADE ESTA LÍNEA
 
+  // --- LA TRANSICIÓN UNIFICADA Y CORREGIDA ---
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.6s ease,
+              box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.4s ease;
+
+  // --- PSEUDO-ELEMENTOS Y HOVER ---
   &::before {
     content: '';
     position: absolute;
@@ -103,24 +119,37 @@
     transition: transform 0.4s ease;
   }
 
-  &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
-    border-color: transparent;
+  // --- ESTADO VISIBLE (ACTIVADO POR JS) ---
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 
-    &::before {
-      transform: scaleY(1);
-    }
-
-    .service-icon {
-      transform: scale(1.1) rotate(5deg);
-      background: linear-gradient(135deg, $color-primario, $color-secundario);
-      
-      i {
-        color: white;
+    @for $i from 1 through 4 {
+      &:nth-child(#{$i}) {
+        transition-delay: #{$i * 0.1}s, #{$i * 0.1}s, 0s, 0s;
       }
     }
   }
+
+   &.is-visible:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+      border-color: transparent;
+      transition-delay: 0s; // Reseteamos el delay por si acaso
+
+      &::before {
+        transform: scaleY(1);
+      }
+
+      .service-icon {
+        transform: scale(1.1) rotate(5deg);
+        background: linear-gradient(135deg, $color-primario, $color-secundario);
+        
+        i {
+          color: white;
+        }
+      }    
+    }
 
   .service-icon {
     width: 80px;
@@ -158,19 +187,6 @@
       color: #4a5568;
       font-size: 1.1rem;
       margin-bottom: 0;
-    }
-  }
-}
-
-// Efecto de aparición escalonada
-.service-card {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.6s ease forwards;
-
-  @for $i from 1 through 4 {
-    &:nth-child(#{$i}) {
-      animation-delay: #{$i * 0.1}s;
     }
   }
 }
