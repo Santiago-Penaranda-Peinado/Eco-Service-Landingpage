@@ -1,22 +1,53 @@
-// src/scss/partials/_clients.scss
+// src/scss/partials/_clients.scss (Versión Pulida)
 @use 'variables' as *;
 
 .clients-section {
-  padding: 6rem 0;
-  background-color: $color-fondo;
+  padding: 6rem 0 8rem; // Más espacio vertical
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%); // Fondo degradado sutil
+  position: relative;
+  overflow: hidden;
+}
+
+// --- TÍTULO REFINADO ---
+// Se añaden estilos consistentes con las otras secciones.
+.clients-section .section-title {
+  text-align: center;
+  margin: 0 auto 5rem auto;
   
-  .section-title {
-    margin-bottom: 4rem;
+  .pre-title {
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: $color-primario;
+    background: rgba($color-primario, 0.1);
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+  }
+
+  h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #1a202c;
+    position: relative;
+    padding-bottom: 1.5rem;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(135deg, $color-primario, $color-secundario);
+      border-radius: 2px;
+    }
   }
 }
 
 @keyframes scroll {
-  0% { 
-    transform: translateX(0); 
-  }
-  100% { 
-    transform: translateX(calc(-250px * 6)); // Mueve solo la mitad (los slides originales)
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-250px * 6)); }
 }
 
 .logos-slider {
@@ -28,26 +59,27 @@
     content: '';
     position: absolute;
     top: 0;
-    width: 100px;
+    width: 150px; // Degradado más ancho y suave
     height: 100%;
     z-index: 2;
   }
   
   &::before { 
     left: 0; 
-    background: linear-gradient(to right, $color-fondo, rgba(255,255,255,0)); 
+    // Aseguramos que el degradado coincida con el nuevo fondo
+    background: linear-gradient(to right, #f8fafc, transparent); 
   }
   
   &::after { 
     right: 0; 
-    background: linear-gradient(to left, $color-fondo, rgba(255,255,255,0)); 
+    background: linear-gradient(to left, #f8fafc, transparent); 
   }
 }
 
 .logos-track {
-  animation: scroll 60s linear infinite;
+  animation: scroll 40s linear infinite; // Un poco más rápido
   display: flex;
-  width: calc(250px * 12); // Ancho de slide * número total de slides (originales + duplicados)
+  width: calc(250px * 12);
   
   &:hover {
     animation-play-state: paused;
@@ -65,28 +97,27 @@
   
   img {
     max-width: 180px;
-    max-height: 180px;
-    filter: grayscale(100%);
-    opacity: 0.6;
+    max-height: 100px; // Altura máxima para consistencia
+    filter: grayscale(100%) brightness(1.5); // Efecto de escala de grises más sutil
+    opacity: 0.7;
     transition: all 0.3s ease;
     
     &:hover {
-      filter: grayscale(0%);
+      filter: grayscale(0%) brightness(1);
       opacity: 1;
-      transform: scale(1.05);
+      transform: scale(1.1); // Efecto de hover un poco más pronunciado
     }
   }
-}
-
-// Efecto de pausa al hover para mejor UX
-.logos-track:hover {
-  animation-play-state: paused;
 }
 
 // Responsive
 @media (max-width: 768px) {
   .clients-section {
-    padding: 4rem 0;
+    padding: 4rem 0 5rem;
+  }
+
+  .clients-section .section-title h2 {
+    font-size: 2.2rem; // Ajuste de tamaño de título para móvil
   }
   
   .slide {
@@ -94,11 +125,11 @@
     height: 120px;
     
     img {
-      max-width: 134px;
-      max-height: 134px;
+      max-width: 140px;
     }
   }
   
+  // Se mantiene la lógica responsiva original, solo se ajusta la velocidad
   @keyframes scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(calc(-200px * 6)); }
@@ -106,5 +137,6 @@
   
   .logos-track {
     width: calc(200px * 12);
+    animation-duration: 35s; // Un poco más rápido en móvil
   }
 }

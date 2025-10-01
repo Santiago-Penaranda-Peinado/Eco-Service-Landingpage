@@ -8,20 +8,35 @@
   <script type="module" src="/src/main.js"></script>
 </head>
 <body>
+  <div class="preloader">
+    <img src="/logos/logo.png" alt="Eco Service Mexiquense Logo">
+  </div>
   <header class="site-header">
     <div class="container">
-      <a href="#hero" class="logo">
-        <img src="/logos/logo-op2.png" alt="Eco Service Mexiquense Logo">
+      <a href="#hero" class="logo" aria-label="Eco Service Mexiquense - Inicio">
+        <picture>
+          <source media="(min-width: 769px)" srcset="/logos/logo-op2.png">
+          <img src="/logos/logo.png" alt="Eco Service Mexiquense Logo">
+        </picture>
       </a>
-      <nav class="main-nav">
+
+      <nav class="main-nav" aria-label="Navegación principal">
         <ul>
+          <li><a href="#hero">Inicio</a></li>
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#porque-elegirnos">¿Por qué elegirnos?</a></li>
           <li><a href="#filosofia">Filosofía</a></li>
           <li><a href="#clientes">Clientes</a></li>
         </ul>
       </nav>
-      <a href="#contacto" class="btn btn-primary">Cotiza Ahora</a>
+      
+      <a href="#contacto" class="btn btn-primary desktop-only">Cotiza Ahora</a>
+      
+      <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+        <span class="toggle-icon">
+          <i class="fas fa-bars"></i>
+        </span>
+      </button>
     </div>
   </header>
     <main>
@@ -39,64 +54,180 @@
           </div>
 
           <div class="hero-visual">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
+            <!-- FORMAS DE FONDO (Enormes y difuminadas) -->
+            <div class="background-shape shape-bg-1"></div>
+            <div class="background-shape shape-bg-2"></div>
+            <div class="background-shape shape-bg-3"></div>
+            
+            <!-- CARRUSEL PRINCIPAL -->
+            <div class="shape shape-1">
+              <img src="/images/empresa-1.jpg" alt="Proceso de recolección de residuos industriales" class="slide-image is-active">
+              <img src="/images/empresa-2.jpg" alt="Equipo especializado en manejo de residuos peligrosos" class="slide-image">
+              <img src="/images/empresa-3.jpg" alt="Transporte seguro de materiales" class="slide-image">
+              <img src="/images/empresa-4.jpg" alt="Certificación y documentación de procesos" class="slide-image">
+            </div>
+            
+            <!-- FORMAS SOBRE EL CARRUSEL (2 formas que interactúan) -->
+            <div class="shape shape-2 floating-shape"></div>
+            <div class="shape shape-3 floating-shape"></div>
           </div>
 
         </div>
-      </section>  
+        <div class="section-divider">
+          <div class="wave wave-1"></div>
+          <div class="wave wave-2"></div>
+          <div class="wave wave-3"></div>
+        </div>
+      </section>
+        
 
     <section id="servicios" class="services-section">
-      <div class="container">
-        <div class="section-title">
-          <span>Nuestros Servicios</span>
-          <h2>Soluciones a la medida para cada tipo de residuo</h2>
+      <div class="services-background">
+        <div class="services-shape shape-1"></div>
+        <div class="services-shape shape-2"></div>
+      </div>
+      
+      <div class="container services-container">
+        
+        <div class="section-header" data-animate-on-scroll>
+          <span class="pre-title">Nuestros Servicios</span>
+          <h2 class="main-title">Expertos en soluciones integrales para el manejo de residuos</h2>
+          <p class="section-description">
+            Somos una empresa dedicada a la recolección y transportación de residuos peligrosos (RP's), biológico infecciosos (RPBI's), sólidos urbanos (RSU), y destrucciones fiscales, dando soluciones integrales a micro, pequeños, medianos y grandes generadores.
+          </p>
         </div>
-        <div class="services-grid">
 
-          <article class="service-card" data-animate-on-scroll>
-            <div class="service-icon">
-              <i class="fas fa-industry"></i>
-            </div>
-            <div class="service-content">
-              <h3>Manejo de RP's</h3>
-              <p>Gestión integral de Residuos Peligrosos industriales, garantizando su correcta disposición final y el cumplimiento normativo.</p>
-            </div>
-          </article>
+        <div class="services-interactive-area">
+          <nav class="service-nav">
+            <ul>
+              <li><button class="service-nav-item is-active" data-service="rps">Manejo de RP's</button></li>
+              <li><button class="service-nav-item" data-service="rpbis">Manejo de RPBI's</button></li>
+              <li><button class="service-nav-item" data-service="rsu">Gestión de RSU</button></li>
+              <li><button class="service-nav-item" data-service="fiscales">Destrucciones Fiscales</button></li>
+            </ul>
+          </nav>
 
-          <article class="service-card" data-animate-on-scroll>
-            <div class="service-icon">
-              <i class="fas fa-biohazard"></i>
-            </div>
-            <div class="service-content">
-              <h3>Manejo de RPBI's</h3>
-              <p>Recolección y transporte seguro de Residuos Peligrosos Biológico-Infecciosos para hospitales, clínicas y laboratorios.</p>
-            </div>
-          </article>
+          <div class="service-content-panel">
+            
+            <article class="service-detail is-active" data-service="rps">
+              <div class="service-image">
+                <img src="/images/servicio-rps.jpg" alt="Manejo de Residuos Peligrosos">
+              </div>
+              <div class="service-text-content">
+                <h3>Residuos Peligrosos (RP's)</h3>
+                <p>Gestión completa para residuos industriales, asegurando su manejo, transporte y disposición final acorde a las normativas más estrictas.</p>
+                <div class="service-features">
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="feature-text">Cumplimiento Normativo</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-truck-loading"></i></div>
+                    <div class="feature-text">Transporte Especializado</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-file-certificate"></i></div>
+                    <div class="feature-text">Documentación Completa</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-industry"></i></div>
+                    <div class="feature-text">Sector Industrial</div>
+                  </div>
+                </div>
+              </div>
+            </article>
 
-          <article class="service-card" data-animate-on-scroll>
-            <div class="service-icon">
-              <i class="fas fa-trash-alt"></i>
-            </div>
-            <div class="service-content">
-              <h3>Gestión de RSU</h3>
-              <p>Recolección eficiente de Residuos Sólidos Urbanos para empresas y negocios, con contenedores y equipo especializado.</p>
-            </div>
-          </article>
+            <article class="service-detail" data-service="rpbis">
+              <div class="service-image">
+                <img src="/images/servicio-rpbis.jpg" alt="Manejo de Residuos Biológico Infecciosos">
+              </div>
+              <div class="service-text-content">
+                <h3>Biológico Infecciosos (RPBI's)</h3>
+                <p>Servicio especializado para el sector salud. Realizamos la recolección, transporte y tratamiento de RPBI's con protocolos de máxima seguridad.</p>
+                <div class="service-features">
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-hospital"></i></div>
+                    <div class="feature-text">Sector Salud</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-biohazard"></i></div>
+                    <div class="feature-text">Protocolos de Bioseguridad</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-hand-holding-medical"></i></div>
+                    <div class="feature-text">Personal Certificado</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                    <div class="feature-text">Recolección Programada</div>
+                  </div>
+                </div>
+              </div>
+            </article>
 
-          <article class="service-card" data-animate-on-scroll>
-            <div class="service-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <div class="service-content">
-              <h3>Destrucciones Fiscales</h3>
-              <p>Protección y cuidado de tu marca mediante la destrucción fiscal certificada de materia prima o producto terminado.</p>
-            </div>
-          </article>
+            <article class="service-detail" data-service="rsu">
+              <div class="service-image">
+                <img src="/images/servicio-rsu.jpg" alt="Gestión de Residuos Sólidos Urbanos">
+              </div>
+              <div class="service-text-content">
+                <h3>Residuos Sólidos Urbanos (RSU)</h3>
+                <p>Soluciones eficientes para la recolección de basura en empresas y negocios, con contenedores y equipo adaptado a cada necesidad de volumen.</p>
+                <div class="service-features">
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-business-time"></i></div>
+                    <div class="feature-text">Empresas y Negocios</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-trash-alt"></i></div>
+                    <div class="feature-text">Contenedores Adaptados</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="feature-text">Optimización de Costos</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="feature-text">Flexibilidad Horaria</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            
+            <article class="service-detail" data-service="fiscales">
+              <div class="service-image">
+                <img src="/images/servicio-fiscales.jpg" alt="Destrucciones Fiscales y Cuidado de Marca">
+              </div>
+              <div class="service-text-content">
+                <h3>Destrucciones Fiscales</h3>
+                <p>Protegemos la integridad de tu marca mediante la destrucción fiscal certificada de materia prima o producto terminado obsoleto o defectuoso.</p>
+                <div class="service-features">
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="feature-text">Certificación SAT</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-trademark"></i></div>
+                    <div class="feature-text">Protección de Marca</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <div class="feature-text">Proceso Seguro</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-video"></i></div>
+                    <div class="feature-text">Evidencia Documental</div>
+                  </div>
+                </div>
+              </div>
+            </article>
 
+          </div>
         </div>
+      </div>
+      <div class="section-divider">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
       </div>
     </section>
 
@@ -204,11 +335,16 @@
           </div>
         </div>
       </div>
+      <div class="section-divider">
+          <div class="wave wave-1"></div>
+          <div class="wave wave-2"></div>
+          <div class="wave wave-3"></div>
+      </div>
     </section>
 
     <section id="clientes" class="clients-section curved-divider">
       <div class="container section-title">
-        <span>Confían en Nosotros</span>
+        <span class="pre-title">Confían en Nosotros</span>
         <h2>Nuestros Aliados en el Cuidado Ambiental</h2>
       </div>
       <div class="logos-slider">

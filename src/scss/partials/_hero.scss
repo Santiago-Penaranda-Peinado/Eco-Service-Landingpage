@@ -9,24 +9,13 @@
   position: relative;
   overflow: hidden;
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.03"><polygon fill="%23582153" points="0,1000 1000,0 1000,1000"/></svg>');
-    background-size: cover;
-  }
-
   .hero-container {
     display: grid;
     grid-template-columns: 1fr;
     gap: 4rem;
     align-items: center;
     position: relative;
-    z-index: 2;
+    z-index: 3; // Aseguramos que el contenido esté sobre todo
 
     @media (min-width: 992px) {
       grid-template-columns: 1.2fr 1fr;
@@ -35,7 +24,232 @@
   }
 }
 
-// Estilos para el contenido de texto
+// --- FORMAS DE FONDO - VALORES AJUSTADOS PARA VISIBILIDAD ---
+.background-shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+  animation: floatBackground 25s ease-in-out infinite;
+
+  // Aumentamos la opacidad y reducimos el blur para mejor visibilidad
+  &.shape-bg-1 {
+    top: -150px;  // Más cerca del viewport
+    left: -100px;
+    width: 400px; // Tamaño más manejable
+    height: 400px;
+    background: radial-gradient(circle, 
+      rgba($color-primario, 0.25) 0%,  // Más opaco
+      rgba($color-primario, 0.1) 50%, 
+      transparent 80%);
+    filter: blur(40px); // Menos blur
+    opacity: 0.8; // Más visible
+    animation-delay: 0s;
+  }
+
+  &.shape-bg-2 {
+    bottom: -120px;
+    right: -80px;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, 
+      rgba($color-secundario, 0.2) 0%, 
+      rgba($color-secundario, 0.08) 50%, 
+      transparent 80%);
+    filter: blur(45px);
+    opacity: 0.7;
+    animation-delay: 8s;
+  }
+
+  &.shape-bg-3 {
+    top: 30%; // Posición más central
+    left: 60%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, 
+      rgba(#48bb78, 0.15) 0%, 
+      rgba(#48bb78, 0.05) 50%, 
+      transparent 80%);
+    filter: blur(35px);
+    opacity: 0.6;
+    animation-delay: 15s;
+  }
+}
+
+// --- HERO VISUAL CON CAPAS DE PROFUNDIDAD ---
+.hero-visual {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2; // Capa intermedia
+
+  @media (min-width: 768px) {
+    min-height: 500px;
+  }
+
+  // --- CARRUSEL PRINCIPAL (Capa media) ---
+  .shape-1 {
+    width: 280px;
+    height: 280px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    position: relative;
+    border-radius: 24px;
+    animation: float 6s ease-in-out infinite;
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    z-index: 3;
+    
+    @media (min-width: 768px) {
+      width: 400px;
+      height: 400px;
+    }
+
+    @media (min-width: 1200px) {
+      width: 480px;
+      height: 480px;
+    }
+  }
+
+  // --- FORMAS FLOTANTES SOBRE EL CARRUSEL (Capa frontal) ---
+  .floating-shape {
+    position: absolute;
+    border-radius: 20px;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0.9;
+    filter: blur(0.5px);
+    z-index: 4; // Por encima del carrusel
+    box-shadow: 
+      0 15px 35px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+    &.shape-2 {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, $color-secundario, lighten($color-secundario, 15%));
+      top: 90%;
+      right: 10%;
+      animation: float 4s ease-in-out infinite 1s;
+      
+      @media (min-width: 768px) {
+        width: 150px;
+        height: 150px;
+        top: 90%;
+        right: 15%;
+      }
+    }
+
+    &.shape-3 {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #48bb78, #38a169);
+      bottom: 25%;
+      left: 5%;
+      animation: float 5s ease-in-out infinite 0.5s;
+      border-radius: 50%;
+      
+      @media (min-width: 768px) {
+        width: 100px;
+        height: 100px;
+        bottom: 30%;
+        left: 8%;
+      }
+    }
+  }
+}
+
+// --- ESTILOS PARA EL CARRUSEL DE IMÁGENES ---
+.slide-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: scale(1.02);
+  
+  // Efecto de mejora para las imágenes
+  filter: brightness(1.05) contrast(1.1);
+  
+  // La imagen activa será visible
+  &.is-active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+  }
+}
+
+// --- ANIMACIONES MEJORADAS ---
+
+// Animación de flotación para formas del carrusel
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translateY(-15px) rotate(2deg) scale(1.02);
+  }
+  66% {
+    transform: translateY(8px) rotate(-2deg) scale(0.98);
+  }
+}
+
+// Animación para formas de fondo (más lenta y amplia)
+@keyframes floatBackground {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  20% {
+    transform: translate(30px, -40px) scale(1.1) rotate(5deg);
+  }
+  40% {
+    transform: translate(-20px, 25px) scale(0.95) rotate(-3deg);
+  }
+  60% {
+    transform: translate(-35px, -15px) scale(1.05) rotate(2deg);
+  }
+  80% {
+    transform: translate(15px, 30px) scale(0.98) rotate(-4deg);
+  }
+}
+
+// Efectos de hover para las formas flotantes
+.hero-visual:hover {
+  .floating-shape {
+    opacity: 1;
+    filter: blur(0);
+    
+    &.shape-2 {
+      transform: translateY(-10px) scale(1.1);
+      box-shadow: 
+        0 25px 50px rgba($color-secundario, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+    
+    &.shape-3 {
+      transform: translateY(-8px) scale(1.15);
+      box-shadow: 
+        0 20px 40px rgba(#48bb78, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+  }
+  
+  .shape-1 {
+    transform: scale(1.02);
+    box-shadow: 
+      0 35px 70px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+}
+
+// --- CONTENIDO DE TEXTO (se mantiene igual) ---
 .hero-content {
   text-align: center;
   
@@ -122,149 +336,92 @@
   }
 }
 
-// Estilos para el área visual con formas animadas
-.hero-visual {
-  position: relative;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media (min-width: 768px) {
-    min-height: 500px;
-  }
-
-  .shape {
-    position: absolute;
-    border-radius: 20px;
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    opacity: 0.9;
-    filter: blur(0.5px);
-
-    // Forma principal - grande
-    &.shape-1 {
-      width: 200px;
-      height: 200px;
-      background: linear-gradient(135deg, $color-primario, lighten($color-primario, 15%));
-      top: 10%;
-      left: 10%;
-      animation: float 6s ease-in-out infinite;
-      
-      @media (min-width: 768px) {
-        width: 250px;
-        height: 250px;
-      }
-    }
-
-    // Forma secundaria - mediana
-    &.shape-2 {
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, $color-secundario, lighten($color-secundario, 10%));
-      bottom: 20%;
-      right: 15%;
-      animation: float 4s ease-in-out infinite 1s;
-      
-      @media (min-width: 768px) {
-        width: 150px;
-        height: 150px;
-      }
-    }
-
-    // Forma terciaria - pequeña
-    &.shape-3 {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, #48bb78, #38a169);
-      top: 50%;
-      left: 5%;
-      animation: float 5s ease-in-out infinite 0.5s;
-      border-radius: 50%;
-    }
-
-    // Forma adicional - para balance
-    &.shape-4 {
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(135deg, #4299e1, #3182ce);
-      bottom: 10%;
-      left: 20%;
-      animation: float 7s ease-in-out infinite 1.5s;
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    }
-  }
-}
-
-// Animación de flotación para las formas
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-20px) rotate(5deg);
-  }
-  66% {
-    transform: translateY(10px) rotate(-5deg);
-  }
-}
-
-// Efectos de hover para las formas (opcional, para interactividad)
-.hero-visual:hover {
-  .shape {
-    opacity: 1;
-    filter: blur(0);
-    
-    &.shape-1 {
-      transform: scale(1.05);
-    }
-    
-    &.shape-2 {
-      transform: scale(1.1);
-    }
-    
-    &.shape-3 {
-      transform: scale(1.15);
-    }
-    
-    &.shape-4 {
-      transform: scale(1.08);
-    }
-  }
-}
-
-// Responsive adjustments
+// --- RESPONSIVE ADJUSTMENTS ---
 @media (max-width: 767px) {
   .hero-section {
-    padding: 6rem 0 4rem;
+    padding: 8rem 0 4rem;
     
     .hero-container {
       gap: 3rem;
     }
   }
   
+  // Ajustar formas de fondo en móvil
+  .background-shape {
+    filter: blur(60px);
+    
+    &.shape-bg-1 {
+      width: 400px;
+      height: 400px;
+      top: -150px;
+      left: -100px;
+    }
+    
+    &.shape-bg-2 {
+      width: 450px;
+      height: 450px;
+      bottom: -180px;
+      right: -80px;
+    }
+    
+    &.shape-bg-3 {
+      width: 350px;
+      height: 350px;
+    }
+  }
+  
   .hero-visual {
     min-height: 300px;
     
-    .shape {
-      &.shape-1 {
-        width: 150px;
-        height: 150px;
-      }
-      
+    .shape-1 {
+      width: 220px;
+      height: 220px;
+    }
+    
+    .floating-shape {
       &.shape-2 {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
+        top: 10%;
+        right: 5%;
       }
       
       &.shape-3 {
         width: 60px;
         height: 60px;
-      }
-      
-      &.shape-4 {
-        width: 80px;
-        height: 80px;
+        bottom: 20%;
+        left: 3%;
       }
     }
-  } 
+  }
+  
+  // Ajustar título en móvil
+  .hero-content .main-title {
+    font-size: 2rem;
+    
+    @media (min-width: 480px) {
+      font-size: 2.2rem;
+    }
+  }
 }
+
+// Efecto de profundidad adicional para pantallas grandes
+@media (min-width: 1400px) {
+  .background-shape {
+    &.shape-bg-1 {
+      width: 800px;
+      height: 800px;
+    }
+    
+    &.shape-bg-2 {
+      width: 900px;
+      height: 900px;
+    }
+    
+    &.shape-bg-3 {
+      width: 700px;
+      height: 700px;
+    }
+  }
+}
+
