@@ -1,0 +1,14 @@
+// scss/partials/_reset.scss
+@use 'variables' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif; // Pondremos una fuente mejor después
+  background-color: $color-fondo;
+  color: $color-texto;
+}

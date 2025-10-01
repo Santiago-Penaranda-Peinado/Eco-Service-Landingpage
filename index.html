@@ -1,14 +1,494 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>app</title>
-  </head>
-  <body>
-    <h1>TILIN TEST 9</h1>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco Service Mexiquense - Manejo Integral de Residuos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <div class="preloader">
+    <img src="/logos/logo.png" alt="Eco Service Mexiquense Logo">
+  </div>
+  <header class="site-header">
+    <div class="container">
+      <a href="#hero" class="logo" aria-label="Eco Service Mexiquense - Inicio">
+        <picture>
+          <source media="(min-width: 769px)" srcset="/logos/logo-op2.png">
+          <img src="/logos/logo.png" alt="Eco Service Mexiquense Logo">
+        </picture>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#porque-elegirnos">¿Por qué elegirnos?</a></li>
+          <li><a href="#filosofia">Filosofía</a></li>
+          <li><a href="#clientes">Clientes</a></li>
+        </ul>
+      </nav>
+      
+      <a href="#contacto" class="btn btn-primary desktop-only">Cotiza Ahora</a>
+      
+      <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+        <span class="toggle-icon">
+          <i class="fas fa-bars"></i>
+        </span>
+      </button>
+    </div>
+  </header>
+    <main>
+
+      <section id="hero" class="hero-section">
+        <div class="container hero-container">
+          
+          <div class="hero-content">
+            <span class="pre-title">Eco Service Mexiquense</span>
+            <h1 class="main-title">Expertos en <strong>soluciones integrales</strong> para el manejo de residuos</h1>
+            <p class="hero-description">
+              Transformamos la complejidad de la gestión de residuos en tranquilidad para tu empresa. Garantizamos el cumplimiento normativo con un servicio personalizado y un compromiso real con el medio ambiente.
+            </p>
+            <a href="#contacto" class="btn btn-secondary">Cotiza tu Recolección</a>
+          </div>
+
+          <div class="hero-visual">
+            <!-- FORMAS DE FONDO (Enormes y difuminadas) -->
+            <div class="background-shape shape-bg-1"></div>
+            <div class="background-shape shape-bg-2"></div>
+            <div class="background-shape shape-bg-3"></div>
+            
+            <!-- CARRUSEL PRINCIPAL -->
+            <div class="shape shape-1">
+              <img src="/images/empresa-1.jpg" alt="Proceso de recolección de residuos industriales" class="slide-image is-active">
+              <img src="/images/empresa-2.jpg" alt="Equipo especializado en manejo de residuos peligrosos" class="slide-image">
+              <img src="/images/empresa-3.jpg" alt="Transporte seguro de materiales" class="slide-image">
+              <img src="/images/empresa-4.jpg" alt="Certificación y documentación de procesos" class="slide-image">
+            </div>
+            
+            <!-- FORMAS SOBRE EL CARRUSEL (2 formas que interactúan) -->
+            <div class="shape shape-2 floating-shape"></div>
+            <div class="shape shape-3 floating-shape"></div>
+          </div>
+
+        </div>
+        <div class="section-divider">
+          <div class="wave wave-1"></div>
+          <div class="wave wave-2"></div>
+          <div class="wave wave-3"></div>
+        </div>
+      </section>
+        
+
+    <section id="servicios" class="services-section">
+      <div class="services-background">
+        <div class="services-shape shape-1"></div>
+        <div class="services-shape shape-2"></div>
+      </div>
+      
+      <div class="container services-container">
+        
+        <div class="section-header" data-animate-on-scroll>
+          <span class="pre-title">Nuestros Servicios</span>
+          <h2 class="main-title">Expertos en soluciones integrales para el manejo de residuos</h2>
+          <p class="section-description">
+            Somos una empresa dedicada a la recolección y transportación de residuos peligrosos (RP's), biológico infecciosos (RPBI's), sólidos urbanos (RSU), y destrucciones fiscales, dando soluciones integrales a micro, pequeños, medianos y grandes generadores.
+          </p>
+        </div>
+
+        <div class="services-interactive-area">
+          <nav class="service-nav">
+            <ul>
+              <li><button class="service-nav-item is-active" data-service="rps">Manejo de RP's</button></li>
+              <li><button class="service-nav-item" data-service="rpbis">Manejo de RPBI's</button></li>
+              <li><button class="service-nav-item" data-service="rsu">Gestión de RSU</button></li>
+              <li><button class="service-nav-item" data-service="fiscales">Destrucciones Fiscales</button></li>
+            </ul>
+          </nav>
+
+          <div class="service-content-panel">
+            
+            <article class="service-detail is-active" data-service="rps">
+              <div class="service-image">
+                <img src="/images/servicio-rps.jpg" alt="Manejo de Residuos Peligrosos">
+              </div>
+              <div class="service-text-content">
+                <h3>Residuos Peligrosos (RP's)</h3>
+                <p>Gestión completa para residuos industriales, asegurando su manejo, transporte y disposición final acorde a las normativas más estrictas.</p>
+                <div class="service-features">
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="feature-text">Cumplimiento Normativo</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-truck-loading"></i></div>
+                    <div class="feature-text">Transporte Especializado</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-file-certificate"></i></div>
+                    <div class="feature-text">Documentación Completa</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-industry"></i></div>
+                    <div class="feature-text">Sector Industrial</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="service-detail" data-service="rpbis">
+              <div class="service-image">
+                <img src="/images/servicio-rpbis.jpg" alt="Manejo de Residuos Biológico Infecciosos">
+              </div>
+              <div class="service-text-content">
+                <h3>Biológico Infecciosos (RPBI's)</h3>
+                <p>Servicio especializado para el sector salud. Realizamos la recolección, transporte y tratamiento de RPBI's con protocolos de máxima seguridad.</p>
+                <div class="service-features">
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-hospital"></i></div>
+                    <div class="feature-text">Sector Salud</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-biohazard"></i></div>
+                    <div class="feature-text">Protocolos de Bioseguridad</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-hand-holding-medical"></i></div>
+                    <div class="feature-text">Personal Certificado</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                    <div class="feature-text">Recolección Programada</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="service-detail" data-service="rsu">
+              <div class="service-image">
+                <img src="/images/servicio-rsu.jpg" alt="Gestión de Residuos Sólidos Urbanos">
+              </div>
+              <div class="service-text-content">
+                <h3>Residuos Sólidos Urbanos (RSU)</h3>
+                <p>Soluciones eficientes para la recolección de basura en empresas y negocios, con contenedores y equipo adaptado a cada necesidad de volumen.</p>
+                <div class="service-features">
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-business-time"></i></div>
+                    <div class="feature-text">Empresas y Negocios</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-trash-alt"></i></div>
+                    <div class="feature-text">Contenedores Adaptados</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="feature-text">Optimización de Costos</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="feature-text">Flexibilidad Horaria</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            
+            <article class="service-detail" data-service="fiscales">
+              <div class="service-image">
+                <img src="/images/servicio-fiscales.jpg" alt="Destrucciones Fiscales y Cuidado de Marca">
+              </div>
+              <div class="service-text-content">
+                <h3>Destrucciones Fiscales</h3>
+                <p>Protegemos la integridad de tu marca mediante la destrucción fiscal certificada de materia prima o producto terminado obsoleto o defectuoso.</p>
+                <div class="service-features">
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="feature-text">Certificación SAT</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-trademark"></i></div>
+                    <div class="feature-text">Protección de Marca</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <div class="feature-text">Proceso Seguro</div>
+                  </div>
+                  <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-video"></i></div>
+                    <div class="feature-text">Evidencia Documental</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+      <div class="section-divider">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
+      </div>
+    </section>
+
+    <section id="porque-elegirnos" class="why-us-section curved-divider">
+      <div class="container why-us-container">
+
+        <div class="why-us-image">
+          <img src="images/trabajador-equipo.jpg" alt="Personal de Eco Service Mexiquense trabajando con equipo de seguridad">
+        </div>
+
+        <div class="why-us-content">
+          <div class="section-title">
+            <span>Nuestra Ventaja</span>
+            <h2>Tu Aliado Estratégico en la Gestión de Residuos</h2>
+          </div>
+          <p class="why-us-intro">
+            Elegirnos significa optar por un servicio que va más allá de la recolección. Nos convertimos en un socio para tu empresa, garantizando tranquilidad, cumplimiento y un compromiso real con el medio ambiente.
+          </p>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="feature-text">
+                <h3>Seguridad y Confianza</h3>
+                <p>Garantizamos que tus residuos son manejados con el máximo cuidado y conforme a las normativas vigentes.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-clipboard-check"></i>
+              </div>
+              <div class="feature-text">
+                <h3>Cumplimiento Normativo</h3>
+                <p>Aseguramos el cumplimiento riguroso de todas las normativas, ofreciendo certificados que validan el destino final.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-recycle"></i>
+              </div>
+              <div class="feature-text">
+                <h3>Gestión Integral</h3>
+                <p>Ofrecemos un servicio completo que cubre recolección, transporte y disposición final de manera eficiente.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <div class="feature-text">
+                <h3>Compromiso con el Medio Ambiente</h3>
+                <p>
+                  No solo seleccionas una empresa especializada, sino un aliado en la protección del planeta para un futuro más sostenible.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    
+    <section id="filosofia" class="philosophy-section curved-divider">
+      <div class="container philosophy-container">
+        <div class="philosophy-content">
+          <div class="philosophy-header">
+            <span class="pre-title">Nuestra Filosofía</span>
+            <h2>Comprometidos con la Excelencia y la Sostenibilidad</h2>
+          </div>
+          <div class="philosophy-grid">
+            <div class="philosophy-card mission-card" data-animate-on-scroll>
+              <div class="card-icon">
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <h3>Misión</h3>
+              <p>
+                Satisfacer las necesidades de nuestros clientes garantizando el cumplimiento de la normatividad vigente en el manejo de residuos. Nos comprometemos a proporcionar un servicio de calidad excepcional que brinde seguridad y confianza a nuestros clientes, promoviendo un entorno más limpio y sostenible. Trabajamos incansablemente para construir relaciones duraderas basadas en la transparencia, la responsabilidad y la satisfacción del cliente.
+              </p>
+              <div class="card-decoration">
+                <div class="decoration-dot dot-1"></div>
+                <div class="decoration-dot dot-2"></div>
+                <div class="decoration-dot dot-3"></div>
+              </div>
+            </div>
+            
+            <div class="philosophy-card vision-card" data-animate-on-scroll>
+              <div class="card-icon">
+                <i class="fas fa-eye"></i>
+              </div>
+              <h3>Visión</h3>
+              <p>
+                Posicionar a la empresa como una de las líderes en el Estado de México, reconocida por su excelencia en servicios, su compromiso con la innovación y la satisfacción del cliente. Aspiramos a ser un referente en nuestra industria, fomentando el desarrollo sostenible y la responsabilidad social, mientras cultivamos un ambiente de trabajo inclusivo y motivador para nuestros colaboradores.
+              </p>
+              <div class="card-decoration">
+                <div class="decoration-dot dot-1"></div>
+                <div class="decoration-dot dot-2"></div>
+                <div class="decoration-dot dot-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-divider">
+          <div class="wave wave-1"></div>
+          <div class="wave wave-2"></div>
+          <div class="wave wave-3"></div>
+      </div>
+    </section>
+
+    <section id="clientes" class="clients-section curved-divider">
+      <div class="container section-title">
+        <span class="pre-title">Confían en Nosotros</span>
+        <h2>Nuestros Aliados en el Cuidado Ambiental</h2>
+      </div>
+      <div class="logos-slider">
+        <div class="logos-track">
+          <!-- Slides originales -->
+          <div class="slide"><img src="/logos/logos-m/td-logo.png" alt="Logo Technidunnage"></div>
+          <div class="slide"><img src="/logos/logos-m/apollo.png" alt="Logo Apollo"></div>
+          <div class="slide"><img src="/logos/logos-m/pharmaB.png" alt="Logo PharmaB"></div>
+          <div class="slide"><img src="/logos/logos-m/grupo-espaidi.png" alt="Logo Grupo Espaidi"></div>
+          <div class="slide"><img src="/logos/logos-m/omega-color.png" alt="Logo Recursos Omega"></div>
+          <div class="slide"><img src="/logos/logos-m/aceites_especiales.png" alt="Logo Aceites Especiales"></div>
+          
+          <!-- Duplicados para efecto infinito sin interrupción -->
+          <div class="slide"><img src="/logos/logos-m/td-logo.png" alt="Logo Technidunnage"></div>
+          <div class="slide"><img src="/logos/logos-m/apollo.png" alt="Logo Apollo"></div>
+          <div class="slide"><img src="/logos/logos-m/pharmaB.png" alt="Logo PharmaB"></div>
+          <div class="slide"><img src="/logos/logos-m/grupo-espaidi.png" alt="Logo Grupo Espaidi"></div>
+          <div class="slide"><img src="/logos/logos-m/omega-color.png" alt="Logo Recursos Omega"></div>
+          <div class="slide"><img src="/logos/logos-m/aceites_especiales.png" alt="Logo Aceites Especiales"></div>
+
+          <div class="slide"><img src="/logos/logos-m/td-logo.png" alt="Logo Technidunnage"></div>
+          <div class="slide"><img src="/logos/logos-m/apollo.png" alt="Logo Apollo"></div>
+          <div class="slide"><img src="/logos/logos-m/pharmaB.png" alt="Logo PharmaB"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="contact-section ">
+      <div class="container contact-container">
+        <div class="contact-form-wrapper">
+          <div class="section-title">
+            <span>¿Listo para empezar?</span>
+            <h2>Solicita tu Cotización</h2>
+          </div>
+          <form class="contact-form">
+            <input type="text" placeholder="Tu Nombre" required>
+            <input type="email" placeholder="Correo Electrónico" required>
+            <input type="tel" placeholder="Teléfono">
+            <textarea placeholder="Cuéntanos sobre los residuos que necesitas gestionar..." rows="5"></textarea>
+            <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+          </form>
+        </div>
+        <div class="contact-info-wrapper">
+          <h3>Contacto Directo</h3>
+          <p>O si prefieres, contáctanos directamente. Estamos para ayudarte.</p>
+          <ul class="contact-list">
+            <li><i class="fas fa-phone-alt"></i> <strong>Ventas:</strong> 722 566 2157</li>
+            <li><i class="fas fa-user-tie"></i> <strong>Gerente Comercial:</strong> 729 156 3410 (Alberto García)</li>
+            <li><i class="fas fa-user-cog"></i> <strong>Administración:</strong> 722 206 1863 (Enith Hernández)</li>
+            <li><i class="fas fa-envelope"></i> <strong>Email:</strong> admon.ecoservice@gmail.com</li>
+            <li><i class="fas fa-clock"></i> <strong>Horario:</strong> Lunes a Viernes de 9:00 a 17:00</li>
+          </ul>
+        </div>
+      </div>
+    </section>  
+    </main>
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-brand">
+        <div class="logo-container">
+          <img src="/logos/logo-op2.png" alt="Eco Service Mexiquense" class="footer-logo">
+        </div>
+        <p class="footer-tagline">Líderes en soluciones integrales para el manejo sustentable de residuos.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="LinkedIn" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="WhatsApp" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="Email" class="social-link"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column" id="footer-servicios">
+        <h4>Nuestros Servicios</h4>
+        <ul>
+          <li><a href="#servicios"><i class="fas fa-chevron-right"></i>Manejo de RP's</a></li>
+          <li><a href="#servicios"><i class="fas fa-chevron-right"></i>Manejo de RPBI's</a></li>
+          <li><a href="#servicios"><i class="fas fa-chevron-right"></i>Gestión de RSU</a></li>
+          <li><a href="#servicios"><i class="fas fa-chevron-right"></i>Destrucciones Fiscales</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column" id="footer-empresa">
+        <h4>La Empresa</h4>
+        <ul>
+          <li><a href="#porque-elegirnos"><i class="fas fa-chevron-right"></i>¿Por qué elegirnos?</a></li>
+          <li><a href="#filosofia"><i class="fas fa-chevron-right"></i>Filosofía</a></li>
+          <li><a href="#clientes"><i class="fas fa-chevron-right"></i>Clientes</a></li>
+          <li><a href="#contacto"><i class="fas fa-chevron-right"></i>Contacto</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column" id="footer-contacto">
+        <h4>Contacto Directo</h4>
+        <ul>
+          <li class="contact-info-item">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="contact-text">
+              <span class="contact-label">Teléfono</span>
+              <span class="contact-value">722 566 2157</span>
+            </div>
+          </li>
+          <li class="contact-info-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-text">
+              <span class="contact-label">Email</span>
+              <span class="contact-value">admon.ecoservice@gmail.com</span>
+            </div>
+          </li>
+          <li class="contact-info-item">
+            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+            <div class="contact-text">
+              <span class="contact-label">Horario</span>
+              <span class="contact-value">Lun-Vie: 9:00 - 17:00</span>
+            </div>
+          </li>
+          <li class="contact-info-item">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-text">
+              <span class="contact-label">Ubicación</span>
+              <span class="contact-value">Estado de México</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div> <div class="footer-bottom">
+      <div class="container">
+          <div class="footer-bottom-content">
+              <p>&copy; 2025 Eco Service Mexiquense. Todos los derechos reservados.</p>
+              <div class="footer-legal">
+                  <a href="#">Aviso de Privacidad</a>
+                  <span class="separator">|</span>
+                  <a href="#">Términos y Condiciones</a>
+              </div>
+          </div>
+      </div>
+    </div>
+    
+    <div class="footer-waves">
+      <div class="wave wave-1"></div>
+      <div class="wave wave-2"></div>
+      <div class="wave wave-3"></div>
+    </div>
+  </footer>
+</body>
 </html>
