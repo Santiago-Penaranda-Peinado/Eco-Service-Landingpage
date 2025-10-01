@@ -66,7 +66,7 @@
     margin-bottom: 1rem;
     
     @media (min-width: 768px) {
-      font-size: 3.5rem;
+      font-size: 2.5rem;
     }
   }
 }
@@ -85,7 +85,7 @@
 .philosophy-card {
   // --- ESTILOS BASE ---
   background: white;
-  padding: 4rem 3rem;
+  padding: 2rem 2rem;
   border-radius: 30px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(226, 232, 240, 0.8);
@@ -95,7 +95,7 @@
   // --- ESTADO INICIAL PARA ANIMACIÓN DE SCROLL ---
   opacity: 0;
   transform: translateY(30px);
-  will-change: transform, box-shadow; // <-- AÑADE ESTA LÍNEA TAMBIÉN
+  will-change: transform, box-shadow; // Optimización para animaciones
 
   // --- LA TRANSICIÓN UNIFICADA Y CORREGIDA ---
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
