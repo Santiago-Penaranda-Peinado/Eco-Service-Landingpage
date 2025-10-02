@@ -32,13 +32,13 @@
     z-index: 3;
     width: 90%;
     max-width: 1200px;
-    margin: 0 auto 5rem;
+    margin: 0 auto 2rem;
     
     // La magia de Flexbox
     display: flex;
     flex-wrap: wrap; // Permite que los elementos pasen a la siguiente línea si no caben
     justify-content: space-between; // Distribuye el espacio entre los elementos
-    gap: 4rem 2rem; // 4rem de espacio vertical, 2rem horizontal
+    gap: 2rem 2rem; // 4rem de espacio vertical, 2rem horizontal
   }
 
   // --- Definimos el tamaño de cada elemento dentro del Flexbox ---
@@ -48,7 +48,7 @@
 
   .footer-brand {
     flex: 1 1 300px; // Base de 300px, útil para que no se comprima demasiado
-    margin-bottom: 2rem;
+    margin-bottom: 0rem;
     @media (min-width: 1024px) {
       flex-basis: 28%; // En pantallas grandes, le damos un % fijo
     }

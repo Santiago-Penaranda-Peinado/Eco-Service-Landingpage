@@ -52,28 +52,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- LÓGICA BASE PARA TABS DE SERVICIOS (CORREGIDA) ---
     const initServicesTabs = () => {
-      // EL CAMBIO CLAVE ESTÁ AQUÍ: Buscamos la clase correcta.
       const layout = document.querySelector('.services-interactive-area'); 
       if (!layout) return;
 
       const navItems = layout.querySelectorAll('.service-nav-item');
       const detailPanels = layout.querySelectorAll('.service-detail');
 
+      // Detectar si estamos en móvil
+      const isMobile = window.innerWidth < 1024;
+
+      if (isMobile) {
+        // COMPORTAMIENTO MÓVIL: Todas las tarjetas visibles
+        detailPanels.forEach(panel => {
+          panel.setAttribute('data-animate-on-scroll', '');
+          panel.style.display = 'flex';
+          panel.classList.add('is-active');
+        });
+        return; // No inicializamos las pestañas en móvil
+      }
+
+      // COMPORTAMIENTO ESCRITORIO: Sistema de pestañas original
       navItems.forEach(button => {
         button.addEventListener('click', () => {
           const targetService = button.dataset.service;
 
+          // Remover clases activas
           navItems.forEach(item => item.classList.remove('is-active'));
           detailPanels.forEach(panel => panel.classList.remove('is-active'));
 
+          // Activar el botón clickeado
           button.classList.add('is-active');
 
+          // Activar el panel correspondiente
           const targetPanel = layout.querySelector(`.service-detail[data-service="${targetService}"]`);
           if (targetPanel) {
             targetPanel.classList.add('is-active');
           }
         });
       });
+    };
+
+    // Manejar cambios de tamaño con debounce para mejor performance
+    let resizeTimeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        initServicesTabs(); // Reinicializar cuando cambie el tamaño
+      }, 250);
     };
 
   // --- LÓGICA HEADER FIJO (optimizada) ---
@@ -205,5 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
   initMobileMenu();
   initScrollAnimations();
+  document.addEventListener('DOMContentLoaded', initServicesTabs);
+  window.addEventListener('resize', handleResize);
 
 });

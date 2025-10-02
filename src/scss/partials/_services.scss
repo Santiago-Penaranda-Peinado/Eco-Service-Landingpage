@@ -1,4 +1,4 @@
-// src/scss/partials/_services.scss (Responsive Corregido)
+// src/scss/partials/_services.scss (Versión Completa con Mobile Apilado)
 @use 'variables' as *;
 @use 'sass:color';
 
@@ -651,6 +651,113 @@
   }
 }
 
+// --- COMPORTAMIENTO PARA MÓVIL (TARJETAS APILADAS) ---
+@media (max-width: 1023px) {
+  
+  // 1. Ocultamos la barra de navegación de pestañas en móvil
+  .service-nav {
+    display: none;
+  }
+
+  // 2. El contenedor principal ahora será una simple columna sin estilos de tarjeta
+  .services-interactive-area {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    
+    &::before {
+      display: none;
+    }
+  }
+  
+  // 3. El panel de contenido ya no es un panel, sino el contenedor de las tarjetas
+  .service-content-panel {
+    padding: 0;
+    min-height: auto;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; // Espacio entre cada tarjeta
+  }
+
+  // 4. ¡LA CLAVE! Mostramos TODAS las tarjetas y les damos estilos individuales
+  .service-detail {
+    display: flex !important; // Forzamos a que todas sean visibles
+    flex-direction: column;
+    gap: 1.5rem;
+    position: static;
+    opacity: 1 !important; // Anulamos la opacidad para que sean visibles
+    transform: none !important;
+    visibility: visible !important;
+    
+    // Estilos de tarjeta individual
+    background: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 
+      0 10px 30px -10px rgba(0, 0, 0, 0.1),
+      0 4px 15px -5px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 20px 40px -15px rgba(0, 0, 0, 0.15),
+        0 8px 25px -8px rgba(0, 0, 0, 0.1);
+    }
+    
+    // Aplicamos la animación de entrada a cada tarjeta
+    &[data-animate-on-scroll] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+      // Efecto escalonado
+      &:nth-of-type(1) { transition-delay: 0.1s; }
+      &:nth-of-type(2) { transition-delay: 0.2s; }
+      &:nth-of-type(3) { transition-delay: 0.3s; }
+      &:nth-of-type(4) { transition-delay: 0.4s; }
+
+      &.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  // Ajustes de texto e imágenes para el layout de tarjeta apilada
+  .service-detail {
+    .service-image {
+      height: 200px;
+      border-radius: 12px;
+    }
+    
+    .service-text-content h3 {
+      font-size: 1.5rem;
+      &::after {
+        left: 0;
+        transform: none;
+      }
+    }
+    
+    .service-text-content p {
+      font-size: 0.95rem;
+    }
+    
+    .service-features {
+      grid-template-columns: 1fr;
+      @media (min-width: 480px) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  }
+}
+
 // Animaciones
 @keyframes floatBackground {
   0%, 100% {
@@ -676,5 +783,24 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
     transform: translateY(-2px);
     transition: all 0.3s ease;
+  }
+}
+
+@media (max-width: 1023px) {
+  .service-detail[data-animate-on-scroll] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+    
+    // Efecto escalonado para cada tarjeta
+    &:nth-child(1) { transition-delay: 0.1s; }
+    &:nth-child(2) { transition-delay: 0.2s; }
+    &:nth-child(3) { transition-delay: 0.3s; }
+    &:nth-child(4) { transition-delay: 0.4s; }
+    
+    &.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
