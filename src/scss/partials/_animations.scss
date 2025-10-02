@@ -1,0 +1,41 @@
+// src/scss/partials/_animations.scss
+
+// 1. Estado inicial de CUALQUIER elemento que se vaya a animar
+[data-animate-on-scroll] {
+  opacity: 0;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  // Por defecto, la animación será un simple fade-in
+  &.fade-in {
+    transform: translateY(0);
+  }
+
+  // Animación de abajo hacia arriba
+  &.fade-in-up {
+    transform: translateY(30px);
+  }
+
+  // Animación de izquierda a derecha
+  &.fade-in-left {
+    transform: translateX(-30px);
+  }
+
+  // Animación de derecha a izquierda
+  &.fade-in-right {
+    transform: translateX(30px);
+  }
+}
+
+// 2. Estado final (cuando JS añade la clase .is-visible)
+[data-animate-on-scroll].is-visible {
+  opacity: 1;
+  transform: translate(0, 0); // Vuelve a su posición original
+}
+
+// 3. Clases de Retraso (Delay) opcionales
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+.delay-6 { transition-delay: 0.6s; }

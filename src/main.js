@@ -1,6 +1,7 @@
 // main.js - VERSIÓN CORREGIDA
 
 import './scss/style.scss';
+import createScrollObserver from './js/animateOnScroll.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   
@@ -202,34 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // --- LÓGICA ANIMACIONES SCROLL ---
-  const initScrollAnimations = () => {
-    const animatedElements = document.querySelectorAll('[data-animate-on-scroll]');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
-
-    animatedElements.forEach(element => {
-      observer.observe(element);
-    });
-  };
-
   // --- INICIALIZAR TODAS LAS FUNCIONES ---
   initPreloader();
   initHeroSlider();
   initServicesTabs();
   initHeaderScroll();
   initMobileMenu();
-  initScrollAnimations();
+  createScrollObserver();
   document.addEventListener('DOMContentLoaded', initServicesTabs);
   window.addEventListener('resize', handleResize);
 
