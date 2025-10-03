@@ -5,6 +5,22 @@ import createScrollObserver from './js/animateOnScroll.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   
+  const initVideoFallback = () => {
+    const video = document.querySelector('.hero-video');
+    const videoContainer = document.querySelector('.hero-video-bg');
+    
+    if (video) {
+      video.addEventListener('error', () => {
+        videoContainer.classList.add('no-video');
+      });
+      
+      // Verificar si el video puede reproducirse
+      video.addEventListener('canplay', () => {
+        videoContainer.classList.remove('no-video');
+      });
+    }
+  };
+
   // --- LÓGICA PARA EL PRELOADER ---
   const initPreloader = () => {
     const preloader = document.querySelector('.preloader');
@@ -17,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // --- LÓGICA MEJORADA PARA EL CARRUSEL DE IMÁGENES DEL HERO ---
-  const initHeroSlider = () => {
+  /*const initHeroSlider = () => {
     const imageSlider = document.querySelector('.shape-1');
     
     if (imageSlider) {
@@ -49,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         images[0].classList.add('is-active');
       }
     }
-  };
+  };*/
 
   // --- LÓGICA BASE PARA TABS DE SERVICIOS (CORREGIDA) ---
     const initServicesTabs = () => {
@@ -205,7 +221,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- INICIALIZAR TODAS LAS FUNCIONES ---
   initPreloader();
-  initHeroSlider();
+  initVideoFallback();
+  //initHeroSlider();
   initServicesTabs();
   initHeaderScroll();
   initMobileMenu();
