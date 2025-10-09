@@ -19,6 +19,6 @@ npm run build
 
 #3. correr plesk repair fs para corregir permisos
 echo "Reparando permisos de archivos..."
-plesk repair fs -y
+plesk repair ecoservicemexiquense.com.mx fs -y
 
 echo "--- Despliegue completado ---"
