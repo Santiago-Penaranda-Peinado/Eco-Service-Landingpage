@@ -383,11 +383,11 @@
             <span data-animate-on-scroll class="fade-in-up delay-6">¿Listo para empezar?</span>
             <h2 data-animate-on-scroll class="fade-in-up delay-6">Solicita tu Cotización</h2>
           </div>
-          <form class="contact-form" data-animate-on-scroll class="fade-in-up delay-6">
-            <input type="text" placeholder="Tu Nombre" required data-animate-on-scroll class="fade-in-up delay-6">
-            <input type="email" placeholder="Correo Electrónico" required data-animate-on-scroll class="fade-in-up delay-6">
-            <input type="tel" placeholder="Teléfono" data-animate-on-scroll class="fade-in-up delay-6">
-            <textarea placeholder="Cuéntanos sobre los residuos que necesitas gestionar..." rows="5" data-animate-on-scroll class="fade-in-up delay-6"></textarea>
+          <form class="contact-form" action="enviar-formulario.php" method="POST" data-animate-on-scroll class="fade-in-up delay-6">
+            <input type="text" name="nombre" placeholder="Tu Nombre" required data-animate-on-scroll class="fade-in-up delay-6">
+            <input type="email" name="email" placeholder="Correo Electrónico" required data-animate-on-scroll class="fade-in-up delay-6">
+            <input type="tel" name="telefono" placeholder="Teléfono" data-animate-on-scroll class="fade-in-up delay-6">
+            <textarea name="mensaje" placeholder="Cuéntanos sobre los residuos que necesitas gestionar..." rows="5" data-animate-on-scroll class="fade-in-up delay-6"></textarea>
             <button type="submit" class="btn btn-primary" data-animate-on-scroll class="fade-in-up delay-6">Enviar Solicitud</button>
           </form>
         </div>
@@ -503,9 +503,7 @@
           <div class="footer-bottom-content">
               <p>&copy; 2025 Eco Service Mexiquense. Todos los derechos reservados.</p>
               <div class="footer-legal">
-                  <a href="#">Aviso de Privacidad</a>
-                  <span class="separator">|</span>
-                  <a href="#">Términos y Condiciones</a>
+                  <a href="/AVISO-DE-PRIVACIDAD-ECO-SERVICES.pdf">Aviso de Privacidad</a>
               </div>
           </div>
       </div>

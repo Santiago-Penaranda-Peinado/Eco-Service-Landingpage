@@ -1,0 +1,42 @@
+@use 'variables' as *;
+@use 'sass:color';
+
+.gracias-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
+}
+
+.gracias-container {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  text-align: center;
+  max-width: 350px;
+  width: 100%;
+}
+
+.gracias-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  color: #0ea5e9;
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+p {
+  color: #334155;
+  margin-bottom: 1.5rem;
+}
+
+small {
+  color: #64748b;
+  font-size: 0.95rem;
+}
