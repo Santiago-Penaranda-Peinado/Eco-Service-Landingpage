@@ -18,7 +18,7 @@ npm run build
 # 3. Copiamos los archivos PHP de forma segura a 'dist'
 echo "Copiando archivos de formulario a 'dist'..."
 cp enviar-formulario.php dist/
-cp -r PHPMailer/ dist/ # Asegúrate que el nombre (mayúsculas/minúsculas) sea correcto
+cp -r phpmailer/ dist/ # Asegúrate que el nombre (mayúsculas/minúsculas) sea correcto
 
 # 4. Corremos la reparación de permisos
 echo "Reparando permisos de archivos..."
