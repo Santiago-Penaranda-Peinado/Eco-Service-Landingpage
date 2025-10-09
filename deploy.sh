@@ -1,19 +1,20 @@
 #!/bin/bash
 # Script para compilar el sitio de Vite en Plesk
 
+# --- LA CLAVE FINAL: Añadimos la carpeta de Node al PATH del script ---
+# Esto permite que todos los sub-procesos (como los de esbuild) encuentren 'node' y 'npm'.
+export PATH=/opt/plesk/node/24/bin:$PATH
+
 echo "--- Iniciando despliegue en $(date) ---"
 
 # 1. Navegamos a la carpeta httpdocs donde está el package.json
 cd /var/www/vhosts/ecoservicemexiquense.com.mx/httpdocs
 
-# 2. Usamos las rutas absolutas para llamar a node y al script de npm
-
-# Comando para 'npm ci'
+# 2. Ahora podemos usar los comandos cortos porque están en el PATH
 echo "Instalando dependencias..."
-/opt/plesk/node/24/bin/node /opt/plesk/node/24/lib/node_modules/npm/bin/npm-cli.js ci
+npm ci
 
-# Comando para 'npm run build'
 echo "Compilando el sitio..."
-/opt/plesk/node/24/bin/node /opt/plesk/node/24/lib/node_modules/npm/bin/npm-cli.js run build
+npm run build
 
 echo "--- Despliegue completado ---"
