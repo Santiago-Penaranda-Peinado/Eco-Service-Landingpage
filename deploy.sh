@@ -1,23 +1,26 @@
 #!/bin/bash
 # Script para compilar el sitio de Vite en Plesk
 
-# --- LA CLAVE FINAL: Añadimos la carpeta de Node al PATH del script ---
-# Esto permite que todos los sub-procesos (como los de esbuild) encuentren 'node' y 'npm'.
+# --- Añadimos la carpeta de Node al PATH del script ---
 export PATH=/opt/plesk/node/24/bin:$PATH
 
 echo "--- Iniciando despliegue en $(date) ---"
 
-# 1. Navegamos a la carpeta httpdocs donde está el package.json
+# 1. Navegamos a la carpeta httpdocs
 cd /var/www/vhosts/ecoservicemexiquense.com.mx/httpdocs
 
-# 2. Ahora podemos usar los comandos cortos porque están en el PATH
+# 2. Instalamos y compilamos
 echo "Instalando dependencias..."
 npm ci
-
 echo "Compilando el sitio..."
 npm run build
 
-#3. correr plesk repair fs para corregir permisos
+# 3. Copiamos los archivos PHP de forma segura a 'dist'
+echo "Copiando archivos de formulario a 'dist'..."
+cp enviar-formulario.php dist/
+cp -r PHPMailer/ dist/ # Asegúrate que el nombre (mayúsculas/minúsculas) sea correcto
+
+# 4. Corremos la reparación de permisos
 echo "Reparando permisos de archivos..."
 plesk repair fs ecoservicemexiquense.com.mx -y
 
