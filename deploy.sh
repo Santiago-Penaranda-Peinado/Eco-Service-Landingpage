@@ -3,17 +3,17 @@
 
 echo "--- Iniciando despliegue en $(date) ---"
 
-# Navegamos a la carpeta httpdocs donde está el package.json
+# 1. Navegamos a la carpeta httpdocs donde está el package.json
 cd /var/www/vhosts/ecoservicemexiquense.com.mx/httpdocs
 
-# Cargamos el entorno específico de Node.js v24 para tener acceso a 'npm'
-source /opt/plesk/node/24/enable
+# 2. Usamos las rutas absolutas para llamar a node y al script de npm
 
-# Ejecutamos los comandos de compilación
+# Comando para 'npm ci'
 echo "Instalando dependencias..."
-npm ci
+/opt/plesk/node/24/bin/node /opt/plesk/node/24/lib/node_modules/npm/bin/npm-cli.js ci
 
+# Comando para 'npm run build'
 echo "Compilando el sitio..."
-npm run build
+/opt/plesk/node/24/bin/node /opt/plesk/node/24/lib/node_modules/npm/bin/npm-cli.js run build
 
 echo "--- Despliegue completado ---"
