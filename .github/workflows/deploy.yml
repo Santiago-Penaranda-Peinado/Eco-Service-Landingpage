@@ -25,14 +25,18 @@ jobs:
           npm run build
       
       
-      - name: Sync files to server
-        uses: appleboy/ssh-action@master
+      - name: Deploy with rsync
+        uses: easingthemes/ssh-deploy@v5.0.0
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            # Sincroniza el contenido de 'dist' con el directorio de destino
-            # --delete: borra los archivos en el destino que no están en el origen
-            # -avz: a=archive (conserva permisos), v=verbose (muestra progreso), z=compress (comprime datos)
-            rsync -avz --delete ./dist/ ${{ secrets.TARGET_DIR }}
+          # Llave SSH privada para la autenticación
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          # Host del servidor remoto
+          REMOTE_HOST: ${{ secrets.HOST }}
+          # Usuario del servidor remoto
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          # Carpeta de origen en el runner de GitHub (nuestra carpeta compilada)
+          SOURCE: "dist/"
+          # Carpeta de destino en el servidor
+          TARGET: ${{ secrets.TARGET_DIR }}
+          # Opción para borrar los archivos en el destino que ya no existen en el origen
+          ARGS: --delete
