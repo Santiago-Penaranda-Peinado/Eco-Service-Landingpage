@@ -24,24 +24,32 @@ jobs:
           npm ci
           npm run build
 
-      - name: Deploy to Server
+      - name: Clean Remote Directory
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # 1. Navega al directorio raíz del sitio
-            cd /var/www/vhosts/ecoservicemexiquense.com.mx/httpdocs
-            # 2. Borra todo el contenido anterior (excepto archivos ocultos)
-            rm -rf *
+            
+            set -e 
+            
+            echo "Navegando al directorio de destino..."
+            # Usa el secret para la ruta, en lugar de escribirla a mano.
+            cd ${{ secrets.TARGET_DIR }}
+            
+            echo "Directorio actual: $(pwd)"
+            echo "Limpiando contenido del directorio..."
+          
+            rm -rf ./*
+            echo "Limpieza completada."
       
-      - name: Upload new files
+      - name: Upload New Files
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "dist/*"
-
-          target: "/var/www/vhosts/ecoservicemexiquense.com.mx/httpdocs"
+          
+          target: ${{ secrets.TARGET_DIR }}
