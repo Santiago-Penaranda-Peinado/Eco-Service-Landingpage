@@ -23,33 +23,16 @@ jobs:
         run: |
           npm ci
           npm run build
-
-      - name: Clean Remote Directory
+      
+      
+      - name: Sync files to server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            
-            set -e 
-            
-            echo "Navegando al directorio de destino..."
-            # Usa el secret para la ruta, en lugar de escribirla a mano.
-            cd ${{ secrets.TARGET_DIR }}
-            
-            echo "Directorio actual: $(pwd)"
-            echo "Limpiando contenido del directorio..."
-          
-            rm -rf ./*
-            echo "Limpieza completada."
-      
-      - name: Upload New Files
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "dist/*"
-          
-          target: ${{ secrets.TARGET_DIR }}
+            # Sincroniza el contenido de 'dist' con el directorio de destino
+            # --delete: borra los archivos en el destino que no están en el origen
+            # -avz: a=archive (conserva permisos), v=verbose (muestra progreso), z=compress (comprime datos)
+            rsync -avz --delete ./dist/ ${{ secrets.TARGET_DIR }}
