@@ -37,7 +37,7 @@ $cuerpoCorreo = "
 
 // --- Configuración de PHPMailer ---
 $mail = new PHPMailer(true);
-$correoDestino = 'contacto@ecoservicemexiquense.com.mx';
+$correoDestino = 'ventas@ecoservicemexiquense.com.mx';
 
 try {
     // --- Configuración del envío ---
